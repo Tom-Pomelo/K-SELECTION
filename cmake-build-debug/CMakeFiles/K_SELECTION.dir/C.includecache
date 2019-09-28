@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/jixingyou/Desktop/K-SELECTION/COMPARE.c
+stdio.h
+-
+stdarg.h
+-
+
+/Users/jixingyou/Desktop/K-SELECTION/MAIN.c
+stdio.h
+-
+COMPARE.c
+/Users/jixingyou/Desktop/K-SELECTION/COMPARE.c
+doalg.c
+/Users/jixingyou/Desktop/K-SELECTION/doalg.c
+
+/Users/jixingyou/Desktop/K-SELECTION/doalg.c
+stdio.h
+-
+
