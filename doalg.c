@@ -1,55 +1,49 @@
 #include <stdio.h>
 
-void qsort(int *a, int left, int right, int k);
+void qsort(int* a, int left, int right);
 int partition(int *index_arr, int left, int right);
 void swap(int *nums, int l, int r);
 
 int doalg(int n, int k, int *Best) {
-    int index_arr[n + 1];
     for (int i = 1; i <= n; ++i) {
-        index_arr[i] = i;
+        Best[i] = i;
     }
 
-    for (int i = 0; i < k; ++i) Best[i] = -1;
-
-    qsort(index_arr, 1, n, k);
+    qsort(Best, 1, n);
 
     for (int i = 0; i < k; ++i) {
-        Best[i] = index_arr[i + 1];
+        Best[i] = Best[i + 1];
     }
-    printf("\n");
-    for (int i = 0; i < k; ++i) {
-        printf("%d\n", Best[i]);
+    for (int i = k; i <= n; ++i) {
+        Best[i] = -1;
     }
 
     return 1;
 }
 
-
-void qsort(int *a, int left, int right, int k) {
-    if (left >= right) return;
+void qsort(int* a, int left, int right) {
+    if (left >= right) return;;
     int pivotat = partition(a, left, right);
-    qsort(a, left, pivotat - 1, k);
-    qsort(a, pivotat + 1, right, k);
-
+    qsort(a, left, pivotat - 1);
+    qsort(a, pivotat + 1, right);
 }
 
-int partition(int *index_arr, int left, int right) {
+int partition(int *Best, int left, int right) {
     int l = left + 1, r = right;
     while (l <= r) {
-        if (COMPARE(index_arr[left], index_arr[l]) == 1 && COMPARE(index_arr[left], index_arr[r]) == 2) {
-            swap(index_arr, l, r);
+        if (COMPARE(Best[left], Best[l]) == 1 && COMPARE(Best[left], Best[r]) == 2) {
+            swap(Best, l, r);
             l++;
             r--;
         }
-        if (COMPARE(index_arr[left], index_arr[l]) == 2) {
+        if (COMPARE(Best[left], Best[l]) == 2) {
             l++;
         }
-        if (COMPARE(index_arr[left], index_arr[r]) == 1) {
+        if (COMPARE(Best[left], Best[r]) == 1) {
             r--;
         }
     }
-    swap(index_arr, left, r);
+    swap(Best, left, r);
     return r;
 }
 

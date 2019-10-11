@@ -6,7 +6,7 @@
 main() {
 //    int N = 10000;
 //    int K = 40;
-    int N = 100;
+    int N = 30;
     int K = 4;
     int Best[MAXK];
     int k, n, flag, round, ct, loop, biggest, total;
