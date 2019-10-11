@@ -1,28 +1,43 @@
 #include <stdio.h>
 
-void qsort(int* a, int left, int right);
+#define true 1
+
+void findK(int *a, int left, int right, int k);
+void qsort(int *a, int left, int right);
 int partition(int *index_arr, int left, int right);
 void swap(int *nums, int l, int r);
 
 int doalg(int n, int k, int *Best) {
+    int index_arr[n + 1];
     for (int i = 1; i <= n; ++i) {
-        Best[i] = i;
+        index_arr[i] = i;
     }
 
-    qsort(Best, 1, n);
+    findK(index_arr, 1, n, k);
 
     for (int i = 0; i < k; ++i) {
-        Best[i] = Best[i + 1];
-    }
-    for (int i = k; i <= n; ++i) {
-        Best[i] = -1;
+        Best[i] = index_arr[i + 1];
     }
 
     return 1;
 }
 
-void qsort(int* a, int left, int right) {
-    if (left >= right) return;;
+void findK(int *a, int left, int right, int k) {
+    while (true) {
+        int p = partition(a, left, right);
+        if (p == k) {
+            break;
+        } else if (p < k) {
+            left = p + 1;
+        } else {
+            right = p - 1;
+        }
+    }
+    qsort(a, 1, k);
+}
+
+void qsort(int *a, int left, int right) {
+    if (left >= right) return;
     int pivotat = partition(a, left, right);
     qsort(a, left, pivotat - 1);
     qsort(a, pivotat + 1, right);
