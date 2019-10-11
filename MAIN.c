@@ -4,8 +4,10 @@
 #include "COMPARE.c"
 #include "doalg.c"
 main() {
-    int N = 10000;
-    int K = 40;
+//    int N = 10000;
+//    int K = 40;
+    int N = 100;
+    int K = 4;
     int Best[MAXK];
     int k, n, flag, round, ct, loop, biggest, total;
 
@@ -15,9 +17,6 @@ main() {
         n = N;
         k = K;
         COMPARE(0, n);
-//        for (int i = 0; i < n ; ++i) {
-//            printf(number[i]);
-//        }
         flag = doalg(n, k, Best);
         if (flag == 0) {
             printf(" *** flagged error at loop=%d\n", loop);
