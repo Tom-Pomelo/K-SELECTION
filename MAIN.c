@@ -16,6 +16,10 @@ main() {
         k = K;
         COMPARE(0, n);
         flag = doalg(n, k, Best);
+//        printf("\n");
+//        for (int i = 0; i < k; ++i) {
+//            printf("%d\n", Best[i]);
+//        }
         if (flag == 0) {
             printf(" *** flagged error at loop=%d\n", loop);
             return (0);

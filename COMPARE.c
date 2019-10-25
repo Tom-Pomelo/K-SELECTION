@@ -25,7 +25,7 @@ int COMPARE(int arg1, int arg2, ...) {
     va_list ap;
     static int number[COMPARELIMIT + 1];
     static int comp, size = 0;
-    int *Best;
+    int* Best;
     int i, j, t;
 
     if (arg1 == 0) {
@@ -44,6 +44,10 @@ int COMPARE(int arg1, int arg2, ...) {
         }
         comp = 0;
         size = arg2;
+//        printf("\n");
+//        for (int i = 1; i <= size; ++i) {
+//            printf("%d\n", number[i]);
+//        }
         return (0);
     }
     if (arg1 == -1) {

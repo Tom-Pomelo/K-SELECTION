@@ -2,68 +2,40 @@
 
 #define true 1
 
-void findK(int *a, int left, int right, int k);
-void qsort(int *a, int left, int right);
-int partition(int *index_arr, int left, int right);
-void swap(int *nums, int l, int r);
+void select(int i, int k, int* Best);
 
-int doalg(int n, int k, int *Best) {
-    int index_arr[n + 1];
-    for (int i = 1; i <= n; ++i) {
-        index_arr[i] = i;
-    }
+int bsearch(int id, int left, int right, int* Best);
 
-    findK(index_arr, 1, n, k);
+void shift(int pos, int k, int* Best);
 
-    for (int i = 0; i < k; ++i) {
-        Best[i] = index_arr[i + 1];
-    }
-
+int doalg(int n, int k, int* Best) {
+    for (int i = 0; i < k; ++i) Best[i] = -1;
+    for (int i = 1; i <= n; ++i) select(i, k, Best);
     return 1;
 }
 
-void findK(int *a, int left, int right, int k) {
-    while (true) {
-        int p = partition(a, left, right);
-        if (p == k) {
-            break;
-        } else if (p < k) {
-            left = p + 1;
-        } else {
-            right = p - 1;
-        }
+void select(int i, int k, int* Best) {
+    if (i <= k || COMPARE(Best[k - 1], i) == 2) {
+        Best[k - 1] = i;
+        int pos = bsearch(k - 1, 0, k - 1, Best);
+        shift(pos, k, Best);
     }
-    qsort(a, 1, k);
 }
 
-void qsort(int *a, int left, int right) {
-    if (left >= right) return;
-    int pivotat = partition(a, left, right);
-    qsort(a, left, pivotat - 1);
-    qsort(a, pivotat + 1, right);
-}
-
-int partition(int *Best, int left, int right) {
-    int l = left + 1, r = right;
-    while (l <= r) {
-        if (COMPARE(Best[left], Best[l]) == 1 && COMPARE(Best[left], Best[r]) == 2) {
-            swap(Best, l, r);
-            l++;
-            r--;
-        }
-        if (COMPARE(Best[left], Best[l]) == 2) {
-            l++;
-        }
-        if (COMPARE(Best[left], Best[r]) == 1) {
-            r--;
-        }
+int bsearch(int id, int left, int right, int* Best) {
+    if (left == right) return left;
+    int mid = left + (right - left) / 2;
+    if (Best[mid] == -1 || COMPARE(Best[id], Best[mid]) == 1) {
+        return bsearch(id, left, mid, Best);
+    } else {
+        return bsearch(id, mid + 1, right, Best);
     }
-    swap(Best, left, r);
-    return r;
 }
 
-void swap(int *nums, int l, int r) {
-    int temp = nums[l];
-    nums[l] = nums[r];
-    nums[r] = temp;
+void shift(int pos, int k, int* Best) {
+    int temp = Best[k - 1];
+    for (int i = k - 1; i > pos; --i) {
+        Best[i] = Best[i - 1];
+    }
+    Best[pos] = temp;
 }
