@@ -1,23 +1,19 @@
 #include <stdio.h>
 
-void select(int i, int k, int* Best);
-
 int bsearch(int id, int left, int right, int* Best);
 
 void insert(int pos, int k, int* Best);
 
 int doalg(int n, int k, int* Best) {
     for (int i = 0; i < k; ++i) Best[i] = -1;
-    for (int i = 1; i <= n; ++i) select(i, k, Best);
-    return 1;
-}
-
-void select(int i, int k, int* Best) {
-    if (i <= k || COMPARE(Best[k - 1], i) == 2) {
-        Best[k - 1] = i;
-        int pos = bsearch(k - 1, 0, k - 1, Best);
-        insert(pos, k, Best);
+    for (int i = 1; i <= n; ++i) {
+        if (i <= k || COMPARE(Best[k - 1], i) == 2) {
+            Best[k - 1] = i;
+            int pos = bsearch(k - 1, 0, k - 1, Best);
+            insert(pos, k, Best);
+        }
     }
+    return 1;
 }
 
 int bsearch(int id, int left, int right, int* Best) {
