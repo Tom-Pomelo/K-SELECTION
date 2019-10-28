@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int bsearch(int id, int left, int right, int* Best);
 
 void insert(int pos, int k, int* Best);
