@@ -1,3 +1,5 @@
-./cmake-build-debug
-./.idea
-./report
+./cmake-build-debug/
+./.idea/
+./report/
+./calculate/
+./output
